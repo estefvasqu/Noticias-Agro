@@ -2,6 +2,7 @@ from flask import Flask
 from datetime import datetime, timedelta
 import feedparser
 from urllib.parse import quote
+import os  # ✅ Importamos os para leer variables de entorno
 
 app = Flask(__name__)
 
@@ -52,4 +53,6 @@ def noticias_agro():
         return "No hay noticias nuevas en los últimos 90 minutos."
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3000)
+    port = int(os.environ.get("PORT", 5000))  # ✅ Puerto dinámico para Render
+    app.run(host="0.0.0.0", port=port)
+
